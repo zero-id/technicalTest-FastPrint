@@ -76,10 +76,11 @@ class Produk extends BaseController
         //validasi input
         if (!$this->validate([
             'id_produk'     => [
-                'rules' => 'required|is_unique[data_produk.id_produk]',
+                'rules' => 'required|is_unique[data_produk.id_produk]|numeric',
                 'errors' => [
                     'required' => '{field} harus diisi!',
-                    'is_unique' => '{field} harus unik!'
+                    'is_unique' => '{field} harus unik!',
+                    'numeric' => '{field} harus berupa inputan angka!'
                 ]
             ],
             'nama_produk'   =>
@@ -90,8 +91,9 @@ class Produk extends BaseController
                 ]
             ],
             'harga'         => [
-                'rules' => 'numeric',
+                'rules' => 'required|numeric',
                 'errors' => [
+                    'required' => '{field} harus diisi!',
                     'numeric' => '{field} harus berupa inputan angka!'
                 ]
             ],
