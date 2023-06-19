@@ -30,6 +30,7 @@ class DataProduk extends Migration
                 'constraint' => '255',
             ],
         ]);
+        $this->forge->addKey('id_produk', true);
         $this->forge->createTable('data_produk');
     }
 

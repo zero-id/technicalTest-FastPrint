@@ -19,8 +19,8 @@ class Produk extends BaseController
 
         $response = $client->request('POST', 'https://recruitment.fastprint.co.id/tes/api_tes_programmer', [
             'form_params' => [
-                'username' => 'tesprogrammer180623C22',
-                'password' => md5('bisacoding-18-06-23'),
+                'username' => 'tesprogrammer190623C10',
+                'password' => md5('bisacoding-19-06-23'),
             ],
         ]);
 
@@ -38,7 +38,11 @@ class Produk extends BaseController
                     ]);
                 }
             }
+        }
+        if ($response->getStatusCode() == 200) {
             return d($this->produkModel->findAll());
+        } else {
+            return "gagal mengambil data";
         }
     }
 
@@ -130,7 +134,7 @@ class Produk extends BaseController
         return redirect()->to('/');
     }
 
-    public function edit($id_produk) 
+    public function edit($id_produk)
     {
         $data = [
             'title' => 'Edit',
@@ -141,18 +145,18 @@ class Produk extends BaseController
         return view('produk/edit', $data);
     }
 
-    public function update($id_produk) 
+    public function update($id_produk)
     {
         $this->produkModel
-             ->where('id_produk', $id_produk)
-             ->set([
-                    'id_produk'     => $this->request->getVar('id_produk'),
-                    'nama_produk'   => $this->request->getVar('nama_produk'),
-                    'harga'         => $this->request->getVar('harga'),
-                    'kategori'      => $this->request->getVar('kategori'),
-                    'status'        => $this->request->getVar('status'),
-                ])
-             ->update();
+            ->where('id_produk', $id_produk)
+            ->set([
+                'id_produk'     => $this->request->getVar('id_produk'),
+                'nama_produk'   => $this->request->getVar('nama_produk'),
+                'harga'         => $this->request->getVar('harga'),
+                'kategori'      => $this->request->getVar('kategori'),
+                'status'        => $this->request->getVar('status'),
+            ])
+            ->update();
 
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
 
